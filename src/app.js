@@ -10,17 +10,28 @@ window.onload = function() {
   let pronouns = ["the", "our"];
   let adjs = ["great", "big", "last"];
   let nouns = ["jogger", "racoon", "Ofus"];
-  let extentions = [".com", ".us", ".net", ".io"];
+  let extensions = ["com", "us", "net", "io"];
 
-  for (let pronoun in pronouns) {
-    for (let adj in adjs) {
-      for (let noun in nouns) {
-        for (let extention in extentions) {
-          console.log(
-            pronouns[pronoun] + adjs[adj] + nouns[noun] + extentions[extention]
-          );
+  let names = [];
+
+  for (let pronoun of pronouns) {
+    for (let adj of adjs) {
+      for (let noun of nouns) {
+        for (let extension of extensions) {
+          let domainName = pronoun + adj + noun;
+
+          if (domainName.toLowerCase().endsWith(extension)) {
+            domainName = domainName.slice(
+              0,
+              domainName.length - extension.length
+            );
+          }
+          names.push(`${domainName}.${extension}`);
         }
       }
     }
   }
+
+  console.log("Generated Domain Names: ");
+  names.forEach(name => console.log(name));
 };
